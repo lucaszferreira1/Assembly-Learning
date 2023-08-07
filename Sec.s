@@ -21,7 +21,8 @@ end:
 	li $v0, 1
 	move $a0, $s1
     	syscall
-    	
+
+     	div $s2, $s1, $s2
     	li $v0, 1
 	move $a0, $s2
     	syscall
