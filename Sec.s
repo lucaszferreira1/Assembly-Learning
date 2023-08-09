@@ -1,6 +1,11 @@
 	.text
 	.globl main
 
+	.data
+		newline: .asciiz "\n"
+		error: .asciiz "ERRO"
+	.text
+
 main:
 	li $s1 0 # Soma
 	li $s2 0 # Cont
@@ -11,7 +16,7 @@ while:
 	move $s0, $v0 # lê int
 	
 	add $s1, $s0, $s1 # add int na soma
-	addi $s2, $s2, 1 # add 1 na cont
+	add $s2, $s2, 1 # add 1 na cont
 
 	bne $s0, -1, while
 end:
@@ -21,11 +26,27 @@ end:
 	li $v0, 1
 	move $a0, $s1
     	syscall
-
+    	
+    	li $v0, 4
+	la $a0, newline
+	syscall
+	
+	beqz $s1, erro
+	
      	div $s2, $s1, $s2
     	li $v0, 1
 	move $a0, $s2
     	syscall
     	
+    	j fim
+    	
+erro:
+	li $v0, 4
+	la $a0, error
+	syscall
+
+fim:
 	li $v0, 10
 	syscall
+    
+	
