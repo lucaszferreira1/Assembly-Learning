@@ -41,7 +41,7 @@ fib:
 	addi $sp, $sp, -4 # colocamos o endereço na pilha
 	sw $ra, 0($sp)
 	
-	
+	addi $a0, $a0, 1
 	ori $v0, $zero, 1
 	jal fibonacci
 	
