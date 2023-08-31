@@ -20,17 +20,16 @@ end:
 	syscall
 
 fibonacci:
-	bgt $a0, 1, conti
+	bgt $s0, 1, conti
 	jr $ra
 conti:	
 	addi $sp, $sp, -4 # colocamos o endereço na pilha
 	sw $ra, 0($sp)
 	
-	addi $a0, $a0, -1 # desincrementa 1 de a0
-	add $v0, $a1, $a2 # adiciona anterior à soma atual
-	move $a2, $a1
-	move $a1, $v0
-	
+	add $v0, $s1, $s2 # adiciona anterior à soma atual
+	move $s2, $s1
+	move $s1, $v0
+	addi $s0, $s0, -1 # decrementa 1 de a0
 	
 	jal fibonacci
 	
@@ -43,7 +42,9 @@ fib:
 	sw $ra, 0($sp)
 	
 	li $a1, 1
-	addi $a0, $a0, 1
+	move $s0, $a0
+	move $s1, $a1
+	addi $s0, $s0, 1
 	ori $v0, $zero, 1
 	jal fibonacci
 	
